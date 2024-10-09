@@ -1,44 +1,44 @@
-import { Component } from '@angular/core';
-import { Post } from '../../interfaces/post'; // Assicurati che il path sia corretto
+import { Component, OnInit } from '@angular/core';
+import { Post } from '../../interfaces/post';
+import { iJSONresponse } from '../../interfaces/i-jsonresponse';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   arrayPost: Post[] = [];
-  postInEvidenza: Post | undefined;
-  postRandomici: Post | undefined;
+  postInEvidenza!: Post;
 
-  ngOnInit() {
+  ngOnInit(): void {
     fetch('db.json')
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          return <Promise<iJSONresponse>>response.json();
         } else {
           throw new Error('ERROR');
         }
       })
       .then((dati) => {
-        console.log(dati);
-        this.getPost(dati); // Passa i dati al metodo getPost
+        this.arrayPost = dati.posts;
+        console.log(this.arrayPost);
+        this.getPost();
       })
       .catch((err) => {
         console.log('ERRORE', err);
       });
   }
 
-  getPost(dati: { posts: Post[] }) {
-    dati.posts.forEach((post: Post) => {
-      this.arrayPost.push(post);
-    });
+  arrayRandomPost: Post[] = [];
 
-    console.log(this.arrayPost);
+  getPost() {
+    // Genera un indice casuale
 
-    if (this.arrayPost.length > 0) {
-      const randomIndex = Math.floor(Math.random() * this.arrayPost.length); // Genera un indice casuale
+    for (let i = 0; i <= 3; i++) {
+      const randomIndex = Math.floor(Math.random() * this.arrayPost.length);
       this.postInEvidenza = this.arrayPost[randomIndex];
+      this.arrayRandomPost.push(this.arrayPost[randomIndex]);
     }
   }
 }

@@ -1,17 +1,4 @@
 <h1 class="my-3">Post in Evidenza</h1>
-<div class="constainer">
-  <div class="row">
-    <div class="card shadow">
-      <div *ngIf="postInEvidenza" class="card-body">
-        <h5 class="card-title">{{ postInEvidenza.title }}</h5>
-        <p class="card-text">
-          {{ postInEvidenza.body }}
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<h2></h2>
 <div class="container">
   <div class="row">
     <div class="card shadow">
@@ -20,6 +7,31 @@
         <p class="card-text">
           {{ postInEvidenza.body }}
         </p>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let tag of postInEvidenza.tags" class="list-group-item">
+            {{ tag }}
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary">Leggi</a>
+      </div>
+    </div>
+  </div>
+</div>
+<h2></h2>
+<div class="container">
+  <div class="row">
+    <div
+      class="col-sm-12 col-lg-3"
+      *ngFor="let post of arrayRandomPost; let i = index"
+    >
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">
+            {{ post.body }}
+          </p>
+          <a href="#" class="btn btn-primary">Leggi</a>
+        </div>
       </div>
     </div>
   </div>
