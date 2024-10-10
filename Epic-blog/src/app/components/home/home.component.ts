@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
       })
       .then((dati) => {
         this.arrayPost = dati.posts;
-        console.log(this.arrayPost);
+
         this.getPost();
       })
       .catch((err) => {

@@ -1,10 +1,13 @@
-<h1 class="my-3">Post in Evidenza</h1>
+<h1 class="text-center my-5">Featured Post</h1>
 <div class="container">
   <div class="row">
-    <div class="card shadow">
-      <div *ngIf="postInEvidenza" class="card-body">
+    <div class="card shadow h-100 d-flex flex-column">
+      <div
+        *ngIf="postInEvidenza"
+        class="card-body flex-grow-1 d-flex flex-column"
+      >
         <h5 class="card-title">{{ postInEvidenza.title }}</h5>
-        <p class="card-text">
+        <p class="card-text text-truncate">
           {{ postInEvidenza.body }}
         </p>
         <ul class="list-group list-group-flush">
@@ -12,25 +15,35 @@
             {{ tag }}
           </li>
         </ul>
-        <a href="#" class="btn btn-primary">Leggi</a>
+        <button
+          class="btn btn-dark align-self-start"
+          [routerLink]="['/post-detail', postInEvidenza.id]"
+        >
+          Detail
+        </button>
       </div>
     </div>
   </div>
 </div>
-<h2></h2>
+<h2 class="text-center my-5">Posts you might like</h2>
 <div class="container">
   <div class="row">
     <div
-      class="col-sm-12 col-lg-3"
-      *ngFor="let post of arrayRandomPost; let i = index"
+      class="col-sm-12 mb-sm-3 col-lg-3"
+      *ngFor="let post of arrayRandomPost"
     >
-      <div class="card shadow">
-        <div class="card-body">
+      <div class="card shadow h-100">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ post.title }}</h5>
-          <p class="card-text">
+          <p class="card-text text-truncate flex-grow-1">
             {{ post.body }}
           </p>
-          <a href="#" class="btn btn-primary">Leggi</a>
+          <button
+            class="btn btn-dark align-self-start"
+            [routerLink]="['/post-detail', post.id]"
+          >
+            Detail
+          </button>
         </div>
       </div>
     </div>
